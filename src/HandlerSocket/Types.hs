@@ -15,11 +15,12 @@ instance Show Op where
   show Lte = "<="
 
 type IndexId = Int
-type Column  = String
 type Value   = String
 type Row     = [Value]
 type Limit   = Int
 type Offset  = Int
+
+data Query = Query Op [Value] Limit Offset
 
 class HandlerSocket a where
   open   :: a -> IndexId
@@ -28,27 +29,9 @@ class HandlerSocket a where
               -> String    -- ^ index
               -> [String]  -- ^ columns
               -> IO Result
-  get    :: a -> IndexId
-              -> Op
-              -> [Column]
-              -> Limit
-              -> Offset
-              -> IO Result
-  update :: a -> IndexId
-              -> Op
-              -> [Column]
-              -> [Value]
-              -> Limit
-              -> Offset
-              -> IO Result
-  insert :: a -> IndexId
-              -> [Value]
-              -> IO Result
-  remove :: a -> IndexId
-              -> Op
-              -> [Column]
-              -> Limit
-              -> Offset
-              -> IO Result
+  get    :: a -> IndexId -> Query   -> IO Result
+  update :: a -> IndexId -> Query   -> [Value] -> IO Result
+  insert :: a -> IndexId -> [Value] -> IO Result
+  remove :: a -> IndexId -> Query   -> IO Result
 
 -- vim: set ts=2 sw=2 et :

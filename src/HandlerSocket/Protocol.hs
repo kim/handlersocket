@@ -138,16 +138,16 @@ instance HandlerSocket Server where
       then return $ OpenResult id
       else return $ err r
 
-  get server index op cols limit offset = do
-    r <- sendrecv server (Get index op cols limit offset)
+  get server index (Query op vals limit offset) = do
+    r <- sendrecv server (Get index op vals limit offset)
     if rcode r == 0
       then return $ GetResult (rows' r)
       else return $ err r
     where
       rows' rs = [ [ unpack xs | xs <- xxs ] | xxs <- rows rs ]
 
-  update server index op cols vals limit offset = do
-    r <- sendrecv server (Update index op cols vals limit offset)
+  update server index (Query op qvals limit offset) vals = do
+    r <- sendrecv server (Update index op qvals vals limit offset)
     if rcode r == 0
       then return Ok
       else return (err r)
@@ -158,8 +158,8 @@ instance HandlerSocket Server where
       then return Ok
       else return (err r)
 
-  remove server index op cols limit offset = do
-    r <- sendrecv server (Remove index op cols limit offset)
+  remove server index (Query op vals limit offset) = do
+    r <- sendrecv server (Remove index op vals limit offset)
     if rcode r == 0
       then return Ok
       else return (err r)
