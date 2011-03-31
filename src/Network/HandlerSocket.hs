@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-module HandlerSocket
+module Network.HandlerSocket
   ( HandlerSocket
   , Index(..)
   , Connected

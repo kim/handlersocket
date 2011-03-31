@@ -1,5 +1,5 @@
 Name:                handlersocket
-Version:             0.1
+Version:             0.2
 Synopsis:            Haskell client for HandlerSocket
 Homepage:            http://github.com/kim/handlersocket/
 License:             BSD3
@@ -16,15 +16,15 @@ Library
   hs-source-dirs:    src
 
   Exposed-modules:
-      HandlerSocket
+      Network.HandlerSocket
 
   Build-depends:
-      base >= 4 && < 5
-    , binary >= 0.5.0
-    , bytestring >= 0.9.1.7
-    , split >= 0.1.3
+      base >= 4
+    , binary >= 0.5
+    , bytestring >= 0.9
+    , split >= 0.1
     , network >= 2.3
-    , transformers >= 0.2.2.0
-    , enumerator >= 0.4.9
+    , transformers >= 0.2.0
+    , enumerator >= 0.4
 
   Other-modules:
